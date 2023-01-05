@@ -3,9 +3,11 @@ package adithyaproj.server.customer.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +31,18 @@ public class DepartmentContoller {
     }
 
     @GetMapping("/department/{id}")
-    public List<Department> getDepartmentById(@PathVariable("id") Long DepartmentId) {
-        return departmentService.getDepartment(DepartmentId);
+    public Department getDepartmentById(@PathVariable("id") Long DepartmentId) {
+        return departmentService.getDepartmentById(DepartmentId);
+    }
+
+    @DeleteMapping("/department/{id}")
+    public String deleteDepartmentById(@PathVariable("id") Long DepartmentId) {
+        departmentService.deletedepartmentById(DepartmentId);
+        return "depart successfully deleted";
+    }
+
+    @PutMapping("/department/{id}")
+    public Department updateDepartment(@PathVariable Long DepartmentId, @RequestBody Department department) {
+        return departmentService.updateDepartment(DepartmentId, department);
     }
 }
