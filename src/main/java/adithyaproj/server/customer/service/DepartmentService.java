@@ -3,6 +3,7 @@ package adithyaproj.server.customer.service;
 import java.util.List;
 
 import adithyaproj.server.customer.enitity.Department;
+import adithyaproj.server.customer.error.departmentNotFoundException;
 
 public interface DepartmentService {
 
@@ -10,7 +11,7 @@ public interface DepartmentService {
 
     public List<Department> getDepartment();
 
-    public Department getDepartmentById(Long departmentId);
+    public Department getDepartmentById(Long departmentId) throws departmentNotFoundException;
 
     public void deletedepartmentById(Long departmentId);
 

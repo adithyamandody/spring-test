@@ -2,11 +2,13 @@ package adithyaproj.server.customer.service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import adithyaproj.server.customer.enitity.Department;
+import adithyaproj.server.customer.error.departmentNotFoundException;
 import adithyaproj.server.customer.repository.DepartmentRepository;
 
 @Service
@@ -26,9 +28,17 @@ public class DepartmentServiceImplementation implements DepartmentService {
     }
 
     @Override
-    public Department getDepartmentById(Long departmentId) {
+    public Department getDepartmentById(Long departmentId) throws departmentNotFoundException {
         // TODO Auto-generated method stub
-        return departmentRepository.findById(departmentId).get();
+        Optional<Department> department = departmentRepository.findById(departmentId);
+
+        if (!department.isPresent()) {
+            throw new departmentNotFoundException("Department Not Available");
+
+            // throw new departmentNotFoundException("Department Not Available");
+        }
+
+        return department.get();
     }
 
     @Override
